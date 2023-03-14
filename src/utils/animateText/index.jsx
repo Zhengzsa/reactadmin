@@ -5,7 +5,7 @@ import styles from "./index.scss"
 
 let defaultRun = true
 let infinite = true
-let frameTime = 75
+let frameTime = 150
 let endWaitStep = 3
 let prefixString = ""
 let runTexts = [""]
@@ -56,7 +56,7 @@ function randomNum(minNum, maxNum) {
       return 0
   }
 }
-let randomTime = randomNum(15, 150)
+let randomTime = randomNum(1000, 2000)
 let destroyed = false
 let continue2 = false
 let infinite0 = true
@@ -132,6 +132,7 @@ function fragment(value) {
   return f
 }
 let flag = false
+// 这里接收然后导出
 export default (props) => {
   const { texts } = props
   let container = useRef()
