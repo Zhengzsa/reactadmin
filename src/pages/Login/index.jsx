@@ -5,13 +5,11 @@ import styles from "./index.scss"
 export default function index() {
   return (
     <div>
+      1111111
       <div className={styles.content}>
         <div className={styles.moderate}>
           <AnimateText
-            texts={[
-              " Moderate admin react",
-              "基于React18+AntdDesign5+Mobx+Vite+Ts开发",
-            ]}
+            texts={["这里是测试练习用的react后台管理系统，功能还不是很完善"]}
           ></AnimateText>
         </div>
         <div className={styles.loginPanel}></div>
