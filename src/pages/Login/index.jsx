@@ -1,6 +1,6 @@
 import React from "react"
 import AnimateText from "@/utils/animateText/index"
-import styles from "./index.scss"
+import styles from "./index.scss?"
 
 export default function index() {
   return (
