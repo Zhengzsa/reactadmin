@@ -1,7 +1,7 @@
 import "react"
 import { useRef } from "react"
 import { useEffect } from "react"
-import styles from "./index.scss"
+import styles from "./index.scss?"
 
 let defaultRun = true
 let infinite = true
