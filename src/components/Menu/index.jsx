@@ -12,6 +12,7 @@ const findOpenkey = (key) => {
   const result = []
   const findinfo = (arr) => {
     arr.forEach((item) => {
+      console.log(key)
       if (key.includes(item.key)) {
         result.push(item.key)
         if (item.children) {
