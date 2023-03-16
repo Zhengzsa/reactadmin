@@ -1,11 +1,18 @@
 import React from "react"
 import AnimateText from "@/utils/animateText/index"
 import styles from "./index.scss?"
-
+import { useNavigate } from "react-router-dom"
 export default function index() {
+  const navigate = useNavigate()
   return (
     <div>
-      1111111
+      <button
+        onClick={() => {
+          navigate("/dashboard")
+        }}
+      >
+        登录
+      </button>
       <div className={styles.content}>
         <div className={styles.moderate}>
           <AnimateText

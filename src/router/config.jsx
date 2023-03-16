@@ -1,17 +1,24 @@
-import { lazy } from "react"
-
-const routes = [
+import { UserOutlined, VideoCameraOutlined } from "@ant-design/icons"
+const menus = [
   {
-    path: "/login",
-    component: lazy(() => import("@/pages/Login/index")),
-    meta: {
-      title: "登录页面",
-    },
+    key: "/dashboard",
+    icon: <UserOutlined />,
+    label: "Dashboard",
   },
   {
-    path: "/home",
-    component: lazy(() => import("@/pages/Home/index")),
+    key: "/usermanage",
+    icon: <VideoCameraOutlined />,
+    label: "用户管理",
+    children: [
+      {
+        key: "/usermanage/user",
+        label: "用户信息",
+      },
+      {
+        key: "/usermanage/userlist",
+        label: "用户列表",
+      },
+    ],
   },
 ]
-
-export default routes
+export default menus

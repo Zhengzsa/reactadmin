@@ -1,55 +1,23 @@
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons"
-import { Layout, Menu, theme } from "antd"
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons"
+import { Layout, theme } from "antd"
 import React, { useState } from "react"
+import "./layout.scss"
+import Menus from "../Menu"
 const { Header, Sider, Content } = Layout
 const MyLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false)
   const {
     token: { colorBgContainer },
   } = theme.useToken()
+
   return (
-    <Layout style={{ height: "100vh" }}>
+    <Layout
+      style={{ height: "100vh", width: "100%" }}
+      id="components-layout-demo-custom-trigger"
+    >
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div
-          className="logo"
-          style={{
-            color: "white",
-            height: "8vh",
-            fontSize: "20px",
-            lineHeight: "8vh",
-            textAlign: "center",
-          }}
-        >
-          管理系统
-        </div>
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          items={[
-            {
-              key: "1",
-              icon: <UserOutlined />,
-              label: "nav 1",
-            },
-            {
-              key: "2",
-              icon: <VideoCameraOutlined />,
-              label: "nav 2",
-            },
-            {
-              key: "3",
-              icon: <UploadOutlined />,
-              label: "nav 3",
-            },
-          ]}
-        />
+        <div className="logo" />
+        <Menus />
       </Sider>
       <Layout className="site-layout">
         <Header
