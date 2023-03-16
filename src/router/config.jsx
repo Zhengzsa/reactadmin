@@ -15,7 +15,7 @@ const menus = [
         label: "用户信息",
       },
       {
-        key: "/usermanage/userlist",
+        key: "/usermanage/list",
         label: "用户列表",
       },
     ],
