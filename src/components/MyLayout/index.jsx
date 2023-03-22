@@ -1,15 +1,17 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons"
 import { Layout, theme } from "antd"
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import "./layout.scss"
 import Menus from "../Menu"
 const { Header, Sider, Content } = Layout
 const MyLayout = ({ children }) => {
+  console.log(children)
   const [collapsed, setCollapsed] = useState(false)
   const {
     token: { colorBgContainer },
   } = theme.useToken()
-
+  const naviagte = useNavigate()
   return (
     <Layout
       style={{ height: "100vh", width: "100%" }}
@@ -33,6 +35,14 @@ const MyLayout = ({ children }) => {
               onClick: () => setCollapsed(!collapsed),
             }
           )}
+          <span
+            onClick={() => {
+              naviagte("/login")
+              sessionStorage.clear()
+            }}
+          >
+            退出
+          </span>
         </Header>
         <Content
           style={{

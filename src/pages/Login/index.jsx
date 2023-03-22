@@ -1,13 +1,18 @@
-import React from "react"
+import React, { useContext } from "react"
 import AnimateText from "@/utils/animateText/index"
 import styles from "./index.scss?"
 import { useNavigate } from "react-router-dom"
+import { context } from "@/components/AppPeovider"
 export default function index() {
   const navigate = useNavigate()
+  const { resetMenus } = useContext(context)
+  console.log(resetMenus)
   return (
     <div>
       <button
         onClick={() => {
+          resetMenus("admin")
+          sessionStorage.setItem("token", 12321)
           navigate("/dashboard")
         }}
       >

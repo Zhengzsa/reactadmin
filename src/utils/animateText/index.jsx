@@ -1,3 +1,6 @@
+/**
+ * 这个是打字机效果，有彩色的样式
+ */
 import "react"
 import { useRef } from "react"
 import { useEffect } from "react"
