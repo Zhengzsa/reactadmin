@@ -1,0 +1,54 @@
+import { lazy } from "react";
+import { Navigate } from "react-router-dom";
+import lazyload from "./LazyLoad";
+
+const MyLayout = lazy(() => import("@/components/MyLayout/index"));
+const Login = lazy(() => {
+  import("../pages/Login/index");
+});
+const Dashboard = lazy(() => import("../pages/Dashboard/index"));
+const User = lazy(() => import("../pages/Usermanager/user"));
+const UserList = lazy(() => import("../pages/Usermanager/userlist"));
+const NotFound = lazy(() => import("../pages/NotFound/index"));
+
+const routes = [
+  {
+    path: "/",
+    element: lazyload(MyLayout),
+    children: [
+      {
+        path: "/",
+        element: <Navigate to="/dashboard" />,
+      },
+      {
+        path: "/dashboard",
+        element: lazyload(Dashboard),
+        title: "看板",
+      },
+      {
+        path: "/usermanager/user",
+        element: lazyload(User),
+        title: "用户信息",
+      },
+      {
+        path: "/usermanager/list",
+        element: lazyload(UserList),
+        title: "用户列表",
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: lazyload(Login),
+    title: "登录",
+  },
+  {
+    path: "/404",
+    element: lazyload(NotFound),
+    title: "404",
+  },
+  {
+    path: "*",
+    element: <Navigate to="/404" />,
+  },
+];
