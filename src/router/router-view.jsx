@@ -4,18 +4,21 @@ import React, { Suspense } from "react"
 import { useContext } from "react"
 const NotFound = React.lazy(() => import("@/pages/NotFound/index"))
 import { context } from "../components/AppPeovider"
+import router from "./config"
+import { useRoutes } from "react-router-dom"
 const RouterView = () => {
-  const { routes } = useContext(context)
-  console.log(routes)
+  // const { routes } = useContext(context)
+  // console.log(routes)
   return (
     // 这里是组件懒加载没加载出来之前显示loading
 
     <Suspense fallback={<div>Loading...</div>}>
-      <Routes>
+      {/* <Routes>
         {routes.map((item) => (
-          <Route key={item.key} path={item.key} element={item.element} />
+          <Route key={item.path} path={item.path} element={item.element} />
         ))}
-      </Routes>
+      </Routes> */}
+      {useRoutes(router)}
     </Suspense>
   )
 }
