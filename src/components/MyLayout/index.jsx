@@ -1,61 +1,96 @@
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons"
-import { Layout, theme } from "antd"
-import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import "./layout.scss"
-import Menus from "../Menu"
-const { Header, Sider, Content } = Layout
-const MyLayout = ({ children }) => {
-  console.log(children)
-  const [collapsed, setCollapsed] = useState(false)
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken()
-  const naviagte = useNavigate()
+import React from "react"
+import { DashboardOutlined } from "@ant-design/icons"
+import { ProBreadcrumb, ProConfigProvider } from "@ant-design/pro-components"
+import ProLayout from "@ant-design/pro-layout"
+import { Switch, Tooltip } from "antd"
+import ErrorBoundary from "antd/es/alert/ErrorBoundary"
+import { useState } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import { context } from "../AppPeovider"
+import { useContext } from "react"
+import menudata from "../../router/config"
+import { treeRouter } from "../../utils/common"
+
+export const baseRouterList = [
+  {
+    label: "Dashboard",
+    key: "dashboard",
+    path: "dashboard",
+    icon: <DashboardOutlined />,
+    filepath: "pages/dashboard/index.tsx",
+  },
+]
+export default ({ children }) => {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [pathname, setPathname] = useState(location.pathname)
+  const { menus } = useContext(context)
+  const [dark, setDark] = useState(false)
+
+  const settings = {
+    layout: "mix",
+  }
   return (
-    <Layout
-      style={{ height: "100vh", width: "100%" }}
-      id="components-layout-demo-custom-trigger"
-    >
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="logo" />
-        <Menus />
-      </Sider>
-      <Layout className="site-layout">
-        <Header
-          style={{
-            padding: 0,
-            background: colorBgContainer,
+    <ProConfigProvider dark={dark}>
+      <div
+        id="admin-pro-layout"
+        style={{
+          height: "100vh",
+        }}
+      >
+        <ProLayout
+          siderWidth={200}
+          route={{
+            path: "/",
+            routes: treeRouter([...menudata]),
           }}
-        >
-          {React.createElement(
-            collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-            {
-              className: "trigger",
-              onClick: () => setCollapsed(!collapsed),
-            }
+          {...settings}
+          avatarProps={{
+            size: "small",
+            title: "admin",
+          }}
+          headerContentRender={() => <ProBreadcrumb />} // 根据路径自动计算面包屑
+          actionsRender={(props) => {
+            console.log(props)
+            return [
+              <Tooltip placement="bottom" title={"Sign Out"}>
+                退出
+              </Tooltip>,
+            ]
+          }}
+          menuFooterRender={(props) => {
+            if (props?.collapsed || props?.isMobile) return undefined
+            return (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Switch
+                  checkedChildren="🌜"
+                  unCheckedChildren="🌞"
+                  checked={dark}
+                  onChange={(v) => setDark(v)}
+                />
+              </div>
+            )
+          }}
+          menuItemRender={(item, dom) => (
+            <Link
+              to={item?.path || "/"}
+              onClick={() => {
+                setPathname(item.path || "/")
+              }}
+            >
+              {dom}
+            </Link>
           )}
-          <span
-            onClick={() => {
-              naviagte("/login")
-              sessionStorage.clear()
-            }}
-          >
-            退出
-          </span>
-        </Header>
-        <Content
-          style={{
-            margin: "24px 16px",
-            padding: 24,
-            minHeight: 280,
-            background: colorBgContainer,
-          }}
         >
-          {children}
-        </Content>
-      </Layout>
-    </Layout>
+          <ErrorBoundary>{children}</ErrorBoundary>
+        </ProLayout>
+      </div>
+    </ProConfigProvider>
   )
 }
-export default MyLayout
