@@ -8,8 +8,10 @@ import { Link } from "react-router-dom"
 import { treeRouter } from "../../utils/common"
 import menu from "../../router/menu"
 import { Outlet } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 export default () => {
   const [dark, setDark] = useState(false)
+  const location = useLocation()
   const settings = {
     layout: "mix",
   }
@@ -23,6 +25,7 @@ export default () => {
       >
         <ProLayout
           siderWidth={200}
+          // route 菜单渲染 treeRouter将路由样式渲染成antd所需要的样式
           route={{
             path: "/",
             routes: treeRouter([...menu]),
@@ -32,7 +35,7 @@ export default () => {
             size: "small",
             title: "admin",
           }}
-          // headerContentRender自定义头内容的方法,<ProBreadcrumb />根据路径自动计算面包屑
+          // headerContentRender自定义头内容的方法,<ProBreadcrumb />根据路径自动计算面包屑 要有location，const location = useLocation()
           headerContentRender={() => <ProBreadcrumb />}
           // actionsRender自定义操作列表
           actionsRender={(props) => {
