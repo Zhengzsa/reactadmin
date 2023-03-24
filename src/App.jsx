@@ -1,10 +1,10 @@
 import React from "react"
-import MyLayout from "./components/MyLayout"
-import Routes from "./router/index"
+import { RouterView } from "./router/RouterView"
+import { BrowserRouter } from "react-router-dom"
 export default function App() {
   return (
-    <MyLayout>
-      <Routes />
-    </MyLayout>
+    <BrowserRouter>
+      <RouterView />
+    </BrowserRouter>
   )
 }

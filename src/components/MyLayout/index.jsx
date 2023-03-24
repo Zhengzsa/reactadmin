@@ -8,9 +8,9 @@ import { useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { context } from "../AppPeovider"
 import { useContext } from "react"
-import menudata from "../../router/config"
 import { treeRouter } from "../../utils/common"
-
+import menu from "../../router/menu"
+import { Outlet } from "react-router-dom"
 export const baseRouterList = [
   {
     label: "Dashboard",
@@ -20,13 +20,12 @@ export const baseRouterList = [
     filepath: "pages/dashboard/index.tsx",
   },
 ]
-export default ({ children }) => {
+export default () => {
   const navigate = useNavigate()
   const location = useLocation()
   const [pathname, setPathname] = useState(location.pathname)
   const { menus } = useContext(context)
   const [dark, setDark] = useState(false)
-
   const settings = {
     layout: "mix",
   }
@@ -42,7 +41,7 @@ export default ({ children }) => {
           siderWidth={200}
           route={{
             path: "/",
-            routes: treeRouter([...menudata]),
+            routes: treeRouter([...menu]),
           }}
           {...settings}
           avatarProps={{
@@ -88,7 +87,9 @@ export default ({ children }) => {
             </Link>
           )}
         >
-          <ErrorBoundary>{children}</ErrorBoundary>
+          <ErrorBoundary>
+            <Outlet />
+          </ErrorBoundary>
         </ProLayout>
       </div>
     </ProConfigProvider>

@@ -36,9 +36,9 @@ const router = [
       },
     ],
   },
-  {
-    path: "/*",
-    element: "404",
-  },
+  // {
+  //   path: "/*",
+  //   element: "404",
+  // },
 ]
 export default router

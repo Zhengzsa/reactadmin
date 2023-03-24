@@ -1,15 +1,13 @@
-import { lazy } from "react";
-import { Navigate } from "react-router-dom";
-import lazyload from "./LazyLoad";
-
-const MyLayout = lazy(() => import("@/components/MyLayout/index"));
-const Login = lazy(() => {
-  import("../pages/Login/index");
-});
-const Dashboard = lazy(() => import("../pages/Dashboard/index"));
-const User = lazy(() => import("../pages/Usermanager/user"));
-const UserList = lazy(() => import("../pages/Usermanager/userlist"));
-const NotFound = lazy(() => import("../pages/NotFound/index"));
+import { lazy } from "react"
+import { Navigate } from "react-router-dom"
+import lazyload from "./LazyLoad"
+import { DashboardOutlined, DesktopOutlined } from "@ant-design/icons"
+const MyLayout = lazy(() => import("@/components/MyLayout/index"))
+const Login = lazy(() => import("../pages/Login/index"))
+const Dashboard = lazy(() => import("../pages/Dashboard/index"))
+const User = lazy(() => import("../pages/Usermanager/user"))
+const UserList = lazy(() => import("../pages/Usermanager/userlist"))
+const NotFound = lazy(() => import("../pages/NotFound/index"))
 
 const routes = [
   {
@@ -23,17 +21,22 @@ const routes = [
       {
         path: "/dashboard",
         element: lazyload(Dashboard),
-        title: "看板",
+        label: "dashboard",
+        icon: <DashboardOutlined />,
       },
       {
         path: "/usermanager/user",
         element: lazyload(User),
-        title: "用户信息",
+        label: "用户信息",
       },
       {
         path: "/usermanager/list",
         element: lazyload(UserList),
-        title: "用户列表",
+        label: "用户列表",
+      },
+      {
+        path: "/*",
+        element: "404",
       },
     ],
   },
@@ -42,13 +45,6 @@ const routes = [
     element: lazyload(Login),
     title: "登录",
   },
-  {
-    path: "/404",
-    element: lazyload(NotFound),
-    title: "404",
-  },
-  {
-    path: "*",
-    element: <Navigate to="/404" />,
-  },
-];
+]
+
+export default routes
