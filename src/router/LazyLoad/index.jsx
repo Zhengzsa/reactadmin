@@ -1,6 +1,6 @@
-import { Spin } from "antd";
+import { Spin } from "antd"
 
-import { Suspense } from "react";
+import { Suspense } from "react"
 
 const lazyload = (Comp) => {
   return (
@@ -12,14 +12,14 @@ const lazyload = (Comp) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            height: "100%",
+            height: "100vh",
           }}
         />
       }
     >
       <Comp />
     </Suspense>
-  );
-};
+  )
+}
 
-export default lazyload;
+export default lazyload

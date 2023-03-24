@@ -1,8 +1,8 @@
-import React, { Suspense } from "react"
+import React from "react"
 import { useRoutes } from "react-router-dom"
 
-import routes from "./index副本"
+import routes from "."
 
 export const RouterView = () => {
-  return <Suspense>{useRoutes(routes)}</Suspense>
+  return <div>{useRoutes(routes)}</div>
 }
