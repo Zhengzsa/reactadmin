@@ -1,22 +1,20 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons"
-import { Button, Form, Input } from "antd"
+import { Button, Form, Input, message } from "antd"
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
-// import { context } from "@/components/AppPeovider"
+import { setToken } from "../../utils/token"
 import styles from "./index.module.scss"
 
 const Login = () => {
   const navigator = useNavigate()
-  // const { resetMenus } = useContext(context)
   const [loading, setLoading] = useState(false)
   const onFinish = async (values) => {
-    console.log(values)
     try {
       setLoading(true)
       const userinfo = JSON.stringify(values)
       sessionStorage.setItem("USER_INFO", userinfo)
-      // resetMenus(values.username)
-      // await signIn(dispatch, token)
+      setToken(values.username)
+      message.success("登录成功")
       navigator("/dashboard")
     } finally {
       setLoading(false)

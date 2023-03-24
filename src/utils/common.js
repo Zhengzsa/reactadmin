@@ -19,3 +19,16 @@ export const treeRouter = (list) => {
     }
   })
 }
+
+// 扁平化路由
+export const flatRoute = (routes) => {
+  const arr = []
+  routes.forEach((item) => {
+    const { children, ...info } = item
+    arr.push(info)
+    if (children) {
+      flatRoute(children)
+    }
+  })
+  return arr
+}
