@@ -1,32 +1,15 @@
 import React from "react"
-import { DashboardOutlined } from "@ant-design/icons"
 import { ProBreadcrumb, ProConfigProvider } from "@ant-design/pro-components"
 import ProLayout from "@ant-design/pro-layout"
 import { Switch, Tooltip } from "antd"
 import ErrorBoundary from "antd/es/alert/ErrorBoundary"
 import { useState } from "react"
-import { Link, useLocation, useNavigate } from "react-router-dom"
-import { context } from "../AppPeovider"
-import { useContext } from "react"
-import menudata from "../../router/config"
+import { Link } from "react-router-dom"
 import { treeRouter } from "../../utils/common"
-
-export const baseRouterList = [
-  {
-    label: "Dashboard",
-    key: "dashboard",
-    path: "dashboard",
-    icon: <DashboardOutlined />,
-    filepath: "pages/dashboard/index.tsx",
-  },
-]
-export default ({ children }) => {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const [pathname, setPathname] = useState(location.pathname)
-  const { menus } = useContext(context)
+import menu from "../../router/menu"
+import { Outlet } from "react-router-dom"
+export default () => {
   const [dark, setDark] = useState(false)
-
   const settings = {
     layout: "mix",
   }
@@ -42,22 +25,24 @@ export default ({ children }) => {
           siderWidth={200}
           route={{
             path: "/",
-            routes: treeRouter([...menudata]),
+            routes: treeRouter([...menu]),
           }}
           {...settings}
           avatarProps={{
             size: "small",
             title: "admin",
           }}
-          headerContentRender={() => <ProBreadcrumb />} // 根据路径自动计算面包屑
+          // headerContentRender自定义头内容的方法,<ProBreadcrumb />根据路径自动计算面包屑
+          headerContentRender={() => <ProBreadcrumb />}
+          // actionsRender自定义操作列表
           actionsRender={(props) => {
-            console.log(props)
             return [
               <Tooltip placement="bottom" title={"Sign Out"}>
                 退出
               </Tooltip>,
             ]
           }}
+          // menuFooterRender在 layout 底部渲染一个块 就是左边底部内容
           menuFooterRender={(props) => {
             if (props?.collapsed || props?.isMobile) return undefined
             return (
@@ -77,18 +62,13 @@ export default ({ children }) => {
               </div>
             )
           }}
-          menuItemRender={(item, dom) => (
-            <Link
-              to={item?.path || "/"}
-              onClick={() => {
-                setPathname(item.path || "/")
-              }}
-            >
-              {dom}
-            </Link>
-          )}
+          // menuItemRender自定义菜单项的 render 方法 ，这里是点击更换菜单选项和路由
+          menuItemRender={(item, dom) => <Link to={item?.path}>{dom}</Link>}
         >
-          <ErrorBoundary>{children}</ErrorBoundary>
+          {/* 在这里嵌入Outlet ，先占用子路由渲染位置，和vue的用法一样*/}
+          <ErrorBoundary>
+            <Outlet />
+          </ErrorBoundary>
         </ProLayout>
       </div>
     </ProConfigProvider>

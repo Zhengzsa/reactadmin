@@ -7,12 +7,11 @@ export const treeRouter = (list) => {
       icon: item.icon,
       routes:
         "children" in item
-          ? item.children.map(({ children, icon, label, path, element }) => {
+          ? item.children.map(({ children, icon, label, path }) => {
               return {
                 path: path,
                 name: label,
                 icon: icon,
-                component: element,
                 routes: children,
               }
             })

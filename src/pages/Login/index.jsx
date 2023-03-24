@@ -2,12 +2,12 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons"
 import { Button, Form, Input } from "antd"
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { context } from "@/components/AppPeovider"
+// import { context } from "@/components/AppPeovider"
 import styles from "./index.module.scss"
 
 const Login = () => {
   const navigator = useNavigate()
-  const { resetMenus } = useContext(context)
+  // const { resetMenus } = useContext(context)
   const [loading, setLoading] = useState(false)
   const onFinish = async (values) => {
     console.log(values)
@@ -15,7 +15,7 @@ const Login = () => {
       setLoading(true)
       const userinfo = JSON.stringify(values)
       sessionStorage.setItem("USER_INFO", userinfo)
-      resetMenus(values.username)
+      // resetMenus(values.username)
       // await signIn(dispatch, token)
       navigator("/dashboard")
     } finally {
@@ -56,15 +56,6 @@ const Login = () => {
             placeholder="any password"
           />
         </Form.Item>
-        {/* <Form.Item>
-          <Form.Item noStyle name="remember" valuePropName="checked">
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-
-          <a className="login-form-forgot" href="#">
-            Forgot password
-          </a>
-        </Form.Item> */}
 
         <Form.Item>
           <Button
@@ -76,14 +67,6 @@ const Login = () => {
           >
             登&nbsp;&nbsp;&nbsp;&nbsp;录
           </Button>
-          {/* Or{" "}
-          <a
-            onClick={() => {
-              form.resetFields()
-            }}
-          >
-            register now!
-          </a> */}
         </Form.Item>
       </Form>
     </div>
