@@ -6,7 +6,7 @@ import ErrorBoundary from "antd/es/alert/ErrorBoundary"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { treeRouter } from "../../utils/common"
-import { menus, findRoles } from "../../router/menu"
+import menu from "../../router/menu"
 import { Outlet } from "react-router-dom"
 import { useLocation } from "react-router-dom"
 export default () => {
@@ -15,8 +15,6 @@ export default () => {
   const settings = {
     layout: "mix",
   }
-  const role = sessionStorage.getItem("role")
-  const menu = findRoles(role)
   return (
     <ProConfigProvider dark={dark}>
       <div
