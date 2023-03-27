@@ -1,6 +1,6 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons"
 import { Button, Form, Input, message } from "antd"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { setToken } from "../../utils/token"
 import styles from "./index.module.scss"
@@ -53,7 +53,6 @@ const Login = () => {
             prefix={<LockOutlined />}
             type="password"
             placeholder="any password"
-            autoComplete=""
           />
         </Form.Item>
 

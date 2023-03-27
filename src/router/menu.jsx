@@ -1,5 +1,5 @@
 import routes from "."
-const menus = routes[0].children
+export const menus = routes[0].children
 
 // 根据role角色生成最终菜单
 export const findRoles = (role) => {

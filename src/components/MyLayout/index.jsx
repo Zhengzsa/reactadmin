@@ -6,10 +6,9 @@ import ErrorBoundary from "antd/es/alert/ErrorBoundary"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { treeRouter } from "../../utils/common"
-import { findRoles } from "../../router/menu"
+import { menus, findRoles } from "../../router/menu"
 import { Outlet } from "react-router-dom"
 import { useLocation } from "react-router-dom"
-
 export default () => {
   const [dark, setDark] = useState(false)
   const location = useLocation()

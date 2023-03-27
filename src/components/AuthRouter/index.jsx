@@ -5,6 +5,7 @@ import { getToken } from "../../utils/token"
  * @de 路由守卫组件
  * */
 const AuthRoute = ({ children }) => {
+  console.log(children)
   const { pathname } = useLocation()
 
   if (getToken() && pathname === "/login") {
