@@ -13,6 +13,7 @@ const Login = () => {
       setLoading(true)
       const userinfo = JSON.stringify(values)
       sessionStorage.setItem("USER_INFO", userinfo)
+      sessionStorage.setItem("role", values.username)
       setToken(values.username)
       message.success("登录成功")
       navigator("/dashboard")
