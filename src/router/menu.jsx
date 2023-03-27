@@ -1,4 +1,25 @@
 import routes from "."
-const menu = routes[0].children
+const menus = routes[0].children
 
-export default menu
+// 根据role角色生成最终菜单
+export const findRoles = (role) => {
+  const arr = []
+  findinfo(menus)
+  function findinfo(menus, parent = null) {
+    menus.forEach((item) => {
+      const { children, ...info } = item
+      if (children) {
+        info.children = []
+        findinfo(children, info.children)
+        info.children.length == 0 ? delete info.children : null
+      }
+      if (info.roles) {
+        if (info.roles?.includes(role))
+          parent ? parent.push(info) : arr.push(info)
+      } else {
+        parent ? parent.push(info) : arr.push(info)
+      }
+    })
+  }
+  return arr
+}

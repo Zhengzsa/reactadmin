@@ -1,6 +1,6 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons"
 import { Button, Form, Input, message } from "antd"
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { setToken } from "../../utils/token"
 import styles from "./index.module.scss"
@@ -13,6 +13,7 @@ const Login = () => {
       setLoading(true)
       const userinfo = JSON.stringify(values)
       sessionStorage.setItem("USER_INFO", userinfo)
+      sessionStorage.setItem("role", values.username)
       setToken(values.username)
       message.success("登录成功")
       navigator("/dashboard")
@@ -52,6 +53,7 @@ const Login = () => {
             prefix={<LockOutlined />}
             type="password"
             placeholder="any password"
+            autoComplete=""
           />
         </Form.Item>
 
