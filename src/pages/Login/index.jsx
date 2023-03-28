@@ -52,6 +52,7 @@ const Login = () => {
             prefix={<LockOutlined />}
             type="password"
             placeholder="any password"
+            autoComplete="true"
           />
         </Form.Item>
 
