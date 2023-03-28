@@ -9,7 +9,6 @@ export const counterSlice = createSlice({
   initialState,
   reducers: {
     setname: (state, action) => {
-      console.log(action)
       state.value = action.payload
     },
   },

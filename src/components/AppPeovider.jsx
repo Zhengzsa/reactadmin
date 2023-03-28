@@ -28,7 +28,6 @@ const findRoles = (role) => {
       }
     })
   }
-  console.log(arr)
   return arr
 }
 
@@ -63,10 +62,8 @@ function AppPeovider({ children }) {
   }
   const [menus, setMenus] = useState(defaultMenus)
   const [routes, setRoutes] = useState(defaultRoutes)
-  console.log("1111--------", routes)
   // 根据角色设置路由和菜单（可以在登陆时用）
   const resetMenus = (role) => {
-    console.log(role)
     sessionStorage.setItem("role", role)
     const tmpmenu = findRoles(role)
     setMenus(tmpmenu)

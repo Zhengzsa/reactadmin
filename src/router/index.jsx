@@ -28,16 +28,19 @@ const routes = [
         path: "/usermanager",
         label: "用户管理",
         icon: <DesktopOutlined />,
+        roles: ["admin", "user"],
         children: [
           {
             path: "/usermanager/user",
             element: lazyload(User),
             label: "用户信息",
+            roles: ["admin"],
           },
           {
             path: "/usermanager/list",
             element: lazyload(UserList),
             label: "用户列表",
+            roles: ["admin", "user"],
           },
         ],
       },
