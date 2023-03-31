@@ -5,17 +5,7 @@ export const treeRouter = (list) => {
       path: item.path,
       name: item.label,
       icon: item.icon,
-      routes:
-        "children" in item
-          ? item.children.map(({ children, icon, label, path }) => {
-              return {
-                path: path,
-                name: label,
-                icon: icon,
-                routes: children,
-              }
-            })
-          : undefined,
+      routes: "children" in item ? treeRouter(item.children) : undefined,
     }
   })
 }

@@ -29,7 +29,6 @@ export default () => {
           siderWidth={200}
           // route 菜单渲染 treeRouter将路由样式渲染成antd所需要的样式
           route={{
-            path: "/",
             routes: treeRouter([...menu]),
           }}
           {...settings}

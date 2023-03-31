@@ -69,10 +69,18 @@ const routes = [
             roles: ["admin", "user"],
           },
           {
-            path: "/exception/500",
-            element: lazyload(NoEorr500),
-            label: "500",
+            path: "/exception/other",
+            label: "其他",
+            icon: <ExclamationCircleOutlined />,
             roles: ["admin", "user"],
+            children: [
+              {
+                element: lazyload(NoEorr500),
+                path: "/exception/other/500",
+                label: "500",
+                roles: ["admin", "user"],
+              },
+            ],
           },
         ],
       },
